@@ -6,14 +6,15 @@ class ResponseGenerator:
         self.tokenizer = AutoTokenizer.from_pretrained(rag_llm_model_name, use_auth_token=api_token)
         self.model = AutoModelForCausalLM.from_pretrained(rag_llm_model_name, use_auth_token=api_token)
 
-    def generate_response(self, query, retrieved_chunks, max_new_tokens=512):
+    def generate_response(self, query, retrieved_chunks, max_new_tokens):
         prompt = f"""
+        You are an AI assistant. Based on the information provided, answer the query concisely and directly.
+
         Query: {query}
 
         Relevant Information:
         {retrieved_chunks}
 
-        Answer the query based on the relevant information provided above:
         Answer:
         """
         inputs = self.tokenizer(prompt, return_tensors='pt', truncation=True, max_length=4096)
@@ -21,14 +22,12 @@ class ResponseGenerator:
             **inputs,
             max_new_tokens=max_new_tokens,
             pad_token_id=self.tokenizer.eos_token_id,
-            temperature=0.7,
-            top_k=50,
-            top_p=0.9
+            temperature=0.3,
+            top_k=20,
+            top_p=0.7
         )
         response = self.tokenizer.decode(output[0], skip_special_tokens=True)
 
-        # if "Answer:" in response:
-        #     return response.split("Answer:")[-1].strip()
-        formatted_response = extract_answer(response)
+        formatted_response = extract_answer(response, prompt)
 
         return formatted_response

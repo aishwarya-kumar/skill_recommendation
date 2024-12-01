@@ -35,7 +35,7 @@ class RAGPipeline:
                                                                           self.embedding_manager.model)
 
         # Generate response using the RAG model
-        response = self.response_generator.generate_response(query_prompt, retrieved_chunks)
+        response = self.response_generator.generate_response(query_prompt, retrieved_chunks, self.max_token_limit)
         print(response)
 
         # Save the response to a file

@@ -1,12 +1,29 @@
-def extract_answer(text, delimiter="Answer:"):
-    """
-    Extract the answer portion from a given text based on the specified delimiter.
-    Parameters:
-    - text (str): The input text containing a question and answer.
-    - delimiter (str): The keyword used to separate the question from the answer. Default is "Answer:".
-    Returns:
-    - str: The portion of the text after the delimiter, or the entire text if the delimiter is not found.
-    """
-    if delimiter in text:
-        return text.split(delimiter, 1)[1].strip()
-    return text.strip()
+import json
+
+def load_json(json_path):
+    with open(json_path, 'r') as file:
+        return json.load(file)
+
+# def extract_answer(text, delimiter="Answer:"):
+#     if delimiter in text:
+#         return text.split(delimiter, 1)[1].strip()
+#     return text.strip()
+
+
+# def extract_answer(response, prompt):
+#     # Remove the prompt from the response
+#     answer = response.replace(prompt, "").strip()
+#     return answer
+
+
+def extract_answer(response, prompt=None, delimiter="Answer:"):
+    if prompt:
+        # If prompt is provided, remove it from the response
+        answer = response.replace(prompt, "").strip()
+    elif delimiter in response.strip():
+        # If no prompt, extract based on the delimiter
+        answer = response.split(delimiter, 1)[1].strip()
+    else:
+        # If neither is available, return the response as-is
+        answer = response.strip()
+    return answer

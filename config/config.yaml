@@ -3,10 +3,33 @@ rag_llm_model_name: "meta-llama/Llama-3.2-1B-Instruct"
 max_token_limit: 4096
 chunk_overlap: 200
 chromadb_collection_name: tech_jobs
-query_prompt: >
-  Identify the top 3 job roles or careers for gig workers or freelancers in {current_month} {current_year}. 
-  For each job role, list the top 5 most in-demand skills required to succeed. Provide your response in a structured 
-  format. Keep your response concise and aligned with the specified format.
+query_prompt: |
+    Identify the top 3 job roles or careers for gig workers and freelancers in {current_month} {current_year}. 
+    For each job role, list the top 5 most in-demand skills required to succeed. 
+    Please ensure the output follows the format below:
+    
+    ### Answer:
+    - **Job Role 1**: [Job Role Name]
+        - Skill 1: [Skill 1 Name]
+        - Skill 2: [Skill 2 Name]
+        - Skill 3: [Skill 3 Name]
+        - Skill 4: [Skill 4 Name]
+        - Skill 5: [Skill 5 Name]
+
+    - **Job Role 2**: [Job Role Name]
+        - Skill 1: [Skill 1 Name]
+        - Skill 2: [Skill 2 Name]
+        - Skill 3: [Skill 3 Name]
+        - Skill 4: [Skill 4 Name]
+        - Skill 5: [Skill 5 Name]
+
+    - **Job Role 3**: [Job Role Name]
+        - Skill 1: [Skill 1 Name]
+        - Skill 2: [Skill 2 Name]
+        - Skill 3: [Skill 3 Name]
+        - Skill 4: [Skill 4 Name]
+        - Skill 5: [Skill 5 Name]
+    Do not provide any additional job roles beyond the top 3. Keep the answer concise and simple.
+
 llm_model_name: "meta-llama/Llama-3.2-1B-Instruct"
-max_length: 200
-max_new_tokens: 150
+max_new_tokens: 500

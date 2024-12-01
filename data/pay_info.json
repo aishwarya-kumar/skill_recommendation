@@ -1,0 +1,32 @@
+{
+  "Data Scientist": {
+    "Hourly Rate (USD)": 60
+  },
+  "Software Engineer": {
+    "Hourly Rate (USD)": 50
+  },
+  "UX Designer": {
+    "Hourly Rate (USD)": 45
+  },
+  "Web Developer": {
+    "Hourly Rate (USD)": 40
+  },
+  "Graphic Designer": {
+    "Hourly Rate (USD)": 35
+  },
+  "Digital Marketer": {
+    "Hourly Rate (USD)": 30
+  },
+  "Data Analyst": {
+    "Hourly Rate (USD)": 38
+  },
+  "Machine Learning Engineer": {
+    "Hourly Rate (USD)": 70
+  },
+  "Cloud Engineer": {
+    "Hourly Rate (USD)": 65
+  },
+  "Blockchain Developer": {
+    "Hourly Rate (USD)": 75
+  }
+}
