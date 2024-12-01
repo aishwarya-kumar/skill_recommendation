@@ -1,12 +1,14 @@
-from src.document_processor import load_documents, preprocess_documents
-from src.embedding_manager import EmbeddingManager
-from src.chromadb_manager import ChromaDBManager
-from src.generate_response import ResponseGenerator
+from rag_pipeline.document_processor import load_documents, preprocess_documents
+from rag_pipeline.embedding_manager import EmbeddingManager
+from rag_pipeline.chromadb_manager import ChromaDBManager
+from rag_pipeline.generate_response import ResponseGenerator
 import json
 import os
 
+
 class RAGPipeline:
-    def __init__(self, embedding_model_name, rag_llm_model_name, api_token, max_token_limit, chunk_overlap, collection_name="tech_jobs"):
+    def __init__(self, embedding_model_name, rag_llm_model_name, api_token, max_token_limit, chunk_overlap,
+                 collection_name="tech_jobs"):
         self.api_token = api_token
         self.collection_name = collection_name
         self.max_token_limit = max_token_limit
@@ -37,7 +39,7 @@ class RAGPipeline:
         print(response)
 
         # Save the response to a file
-        output_file_path = os.path.join("rag_pipeline/output/", 'rag_output.json')
+        output_file_path = os.path.join("data/output/", 'rag_output.json')
         rag_output = {"market_trends": response}
         with open(output_file_path, 'w') as json_file:
             json.dump(rag_output, json_file)

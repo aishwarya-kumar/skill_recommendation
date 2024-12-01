@@ -1,4 +1,5 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from utils import extract_answer
 
 class ResponseGenerator:
     def __init__(self, rag_llm_model_name, api_token):
@@ -26,6 +27,8 @@ class ResponseGenerator:
         )
         response = self.tokenizer.decode(output[0], skip_special_tokens=True)
 
-        if "Answer:" in response:
-            return response.split("Answer:")[-1].strip()
-        return response.strip()
+        # if "Answer:" in response:
+        #     return response.split("Answer:")[-1].strip()
+        formatted_response = extract_answer(response)
+
+        return formatted_response

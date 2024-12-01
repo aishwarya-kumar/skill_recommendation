@@ -1,10 +1,14 @@
-from src.rag_pipeline import RAGPipeline
-from src.config_loader import load_config, load_env_variables
 from datetime import datetime
+from rag_pipeline.rag_pipeline import RAGPipeline
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from utils.config_loader import load_config, load_env_variables
+
 
 def main():
     # Load configurations
-    config = load_config("rag_pipeline/config/config.yaml")
+    config = load_config("config/config.yaml")
 
     # Load environment variables
     env_vars = load_env_variables()
@@ -23,7 +27,7 @@ def main():
     current_month = datetime.now().strftime("%B")
 
     # Define path to documents and query prompt
-    documents_path = "rag_pipeline/data/"
+    documents_path = "data/rag_documents/"
     query_prompt = config["query_prompt"]
     query_prompt = query_prompt.format(current_month=current_month, current_year=current_year)
 

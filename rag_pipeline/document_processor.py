@@ -11,6 +11,7 @@ def load_documents(path):
                 text = "".join(page.extract_text() or "" for page in pdf.pages)
                 if text.strip():
                     documents.append({"page_content": text, "metadata": {"source": file}})
+    print(f"Loaded {len(documents)} documents successfully from {path}.")
     return documents
 
 def clean_text(text):
@@ -28,6 +29,6 @@ def preprocess_documents(docs, max_token_limit, chunk_overlap):
         cleaned_content = clean_text(doc["page_content"])
         chunks.extend(
             {"page_content": chunk, "metadata": doc["metadata"]}
-            for chunk in chunk_text(cleaned_content, max_token_limit, chunk_overlap)
-        )
+            for chunk in chunk_text(cleaned_content, max_token_limit, chunk_overlap))
+    print(f"Split {len(docs)} documents into {len(chunks)} chunks.")
     return chunks
