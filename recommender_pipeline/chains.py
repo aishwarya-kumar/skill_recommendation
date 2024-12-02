@@ -1,9 +1,11 @@
 from langchain.chains import LLMChain
-from recommender_pipeline.prompts import (market_trends_prompt, skill_mapping_prompt,
+from recommender_pipeline.prompts import (
+                                            #market_trends_prompt,
+                                          skill_mapping_prompt,
                                           income_comparison_prompt, career_recommendation_prompt, upskilling_prompt)
 
-def create_market_trends_chain(llm):
-    return LLMChain(llm=llm, prompt=market_trends_prompt, output_key="market_explanation")
+# def create_market_trends_chain(llm):
+#     return LLMChain(llm=llm, prompt=market_trends_prompt, output_key="market_explanation")
 
 def create_skill_mapping_chain(llm):
     return LLMChain(llm=llm, prompt=skill_mapping_prompt, output_key="skill_mapping")

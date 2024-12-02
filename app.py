@@ -27,7 +27,10 @@ def gradio_recommendation_interface(user_skills, current_income):
     # Optionally save results
     save_recommendations_to_file(results, 'data/output/career_recommendations.json')
 
-    return results
+    return (results["skill_mapping"],
+            results["income_comparison"],
+            results["career_recommendation"],
+            results["upskilling_directions"])
 
 
 # Define the Gradio app
@@ -36,13 +39,18 @@ inputs = [
     gr.Textbox(label="Enter your current income in $/h", placeholder="e.g., 30"),
 ]
 
-outputs = gr.JSON(label="Career Recommendations")
+outputs = [
+    gr.Textbox(label="Skill Mapping", placeholder="Mapping of your skills to the market."),
+    gr.Textbox(label="Income Comparison", placeholder="Comparison of your income to the market."),
+    gr.Textbox(label="Career Recommendation", placeholder="Recommended career paths."),
+    gr.Textbox(label="Upskilling Directions", placeholder="Steps to improve your skills."),
+]
 
 app = gr.Interface(
     fn=gradio_recommendation_interface,
     inputs=inputs,
     outputs=outputs,
-    title="Career Recommendation Chatbot",
+    title="Career Recommendations",
     description="Get career advice based on your skills and income.",
 )
 
