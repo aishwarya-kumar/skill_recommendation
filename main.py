@@ -14,6 +14,12 @@ def initialize_model(config_path, api_token):
     llm_model_name = config["llm_model_name"]
     max_new_tokens = config["max_new_tokens"]
 
+    temperature = config.get("temperature", 0.3)  # Default 0.3 if not specified
+    top_k = config.get("top_k", 30)  # Default 30 if not specified
+    top_p = config.get("top_p", 0.8)  # Default 0.8 if not specified
+    repetition_penalty = config.get("repetition_penalty", 1.5)  # Default 1.5 if not specified
+    min_length = config.get("min_length", 20)
+
     model = AutoModelForCausalLM.from_pretrained(llm_model_name, use_auth_token=api_token)
     tokenizer = AutoTokenizer.from_pretrained(llm_model_name, use_auth_token=api_token)
 
@@ -24,9 +30,11 @@ def initialize_model(config_path, api_token):
         'text-generation', model=model, tokenizer=tokenizer,
         device=0 if device == "cuda" else -1,
         max_new_tokens=max_new_tokens,
-        temperature=0.3,
-        top_k=30,
-        top_p=0.8
+        temperature=temperature,
+        top_k=top_k,
+        top_p=top_p,
+        repetition_penalty=repetition_penalty,
+        min_length=min_length
     )
     llm = HuggingFacePipeline(pipeline=hf_pipeline)
     return llm
@@ -53,7 +61,6 @@ def save_recommendations_to_file(results, output_path):
 
 def main():
     # Load configuration and environment variables
-    config = load_config("config/config.yaml")
     env_vars = load_env_variables()
     api_token = env_vars["huggingface_api_token"]
 
