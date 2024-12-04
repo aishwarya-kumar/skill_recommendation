@@ -17,15 +17,16 @@ The system identifies in-demand skills, maps transferable skills to relevant job
 
 # Folder Structure Overview
 
-   skill_recommendation/
-   ├── config/
-   ├── data/
-   ├── rag_pipeline/
-   ├── recommender_pipeline/
-   ├── common_utils/
-   ├── main.py
-   ├── requirements.txt
-   └── README.md
+# Folder Structure Overview
+
++-- config/
++-- data/
++-- rag_pipeline/
++-- recommender_pipeline/
++-- common_utils/
++-- main.py
++-- requirements.txt
++-- README.md
 
 The project is modular and organized into the following folders:
 
