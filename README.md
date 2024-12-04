@@ -22,7 +22,7 @@ The system identifies in-demand skills, maps transferable skills to relevant job
    ├── data/
    ├── rag_pipeline/
    ├── recommender_pipeline/
-   ├── utils/
+   ├── common_utils/
    ├── main.py
    ├── requirements.txt
    └── README.md
